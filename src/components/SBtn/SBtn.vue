@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag? tag : 'button'" :class='classes' @click="$emit('click')" :style="styleObj">
+  <component :is="tag? tag : 'button'" :class='classes' :style="styleObj">
     <div class="s-btn__text">
       <slot/>
     </div>
@@ -11,17 +11,14 @@
 </template>
 <script>
   import mixins from '../../util/mixins';
-  import Colorable from '../../mixins/colorable/index'
+  import colorable from '../../mixins/colorable/index'
+  import Vue from 'vue'
 
-
-  const baseMix = mixins(
-    Colorable
-  )
 
   export default {
+    mixins: [colorable],
     name: 'SBtn',
     props: {
-      color: String,
       size: String || Object,
       icon: String,
       iconFill: String, 
@@ -31,9 +28,7 @@
     data() {
       return {
         fill: "",
-        styleObj: {
-          color: this.color
-        }
+        
       }
     },
     computed: {
@@ -46,12 +41,11 @@
           's-control--disabled': this.$attrs.disabled == ''? true : false,
         }
       },
-    },
-    watch: {
-      color(n) {
-        console.log(n)
+      styleObj() {
+        return {}
       }
     },
+
     created() {
       if(this.iconFill === undefined) {
         console.log(1)
