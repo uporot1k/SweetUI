@@ -67,7 +67,12 @@ module.exports = {
       options: {
         name: '[name].[ext]'
       }
-    }, {
+    }, 
+    {
+      test: /\.pug$/,
+      loader: 'pug-plain-loader'
+    },
+    {
       test: /\.styl|stylus$/,
       use: [
         'vue-style-loader',
