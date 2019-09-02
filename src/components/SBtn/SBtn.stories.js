@@ -1,11 +1,9 @@
 import Vue from 'vue';
 import { storiesOf } from '@storybook/vue';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, object, select } from '@storybook/addon-knobs';
 import centered from '@storybook/addon-centered/vue';
 import SBtn from './SBtn.vue';
 import SIcon from '../SIcon/SIcon.vue'
-
-
 
 let stories = storiesOf('Button', module);
 
@@ -17,16 +15,36 @@ let stories = storiesOf('Button', module);
       's-icon': SIcon
     },
     props: {
+      size: {
+        default: select('Size', ['big', 'small']),
+      },
       color: {
         default: text('Color', 'yellow')
       },
       text: {
         default: text('Text', 'test')
+      },
+      outlined: {
+        default: boolean('Outlined', false)
+      },
+      iconPosition: {
+        default: select('Icon Position', ['right', 'left'])
+      },
+      disabled: {
+        default: boolean('Disabled', false)
       }
     },
-    template: `<s-btn :rounded="true" :color="color" icon="search">{{text}}</s-btn>
-                
-    `
+    template: `
+      <s-btn 
+        :size="size" 
+        :color="color" 
+        :outlined="outlined" 
+        :iconPosition="iconPosition"
+        :disabled="disabled"
+      >
+        {{text}}
+      </s-btn>      
+    `,
   }))
   .add('Small', () => ({
     components: { SBtn },
