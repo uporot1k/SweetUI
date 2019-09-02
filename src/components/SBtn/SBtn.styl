@@ -1,0 +1,46 @@
+@import '../../assets/stylus/main.styl'
+
+.s-btn
+  display grid
+  grid-template-columns repeat(2, minmax(max-content, 0))
+  grid-gap 16px
+  align-items center
+  justify-content space-between
+  background-color $color-cornflower
+  border-radius 6px
+  padding 0 16px
+  user-select none
+  font-size 16px
+  &__text
+    grid-row 1
+  &__icon
+    grid-row 1
+    &.icon--left
+      grid-column: 1
+  &:focus
+    outline none
+  &.s-btn  
+    // Size
+    &--small
+      height 36px    
+    &--big
+      height 48px    
+
+    // State 
+    &--disabled
+      background-color $color-grey-3 
+      color #778699 !important  
+      &.s-btn--outlined
+        background #fff 
+        border 2px solid $color-grey-2
+    // Type  
+    &--primary
+      color: white
+      &.s-btn--outlined
+        color: $color-cornflower
+
+    &--outlined
+      background-color #fff
+      border 2px solid $color-cornflower
+     
+        
