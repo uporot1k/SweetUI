@@ -1,16 +1,20 @@
 @import '../../assets/stylus/main.styl'
 
 .s-btn
-  display grid
-  grid-template-columns repeat(2, minmax(max-content, 0))
-  grid-gap 16px
-  align-items center
-  justify-content space-between
-  background-color $color-cornflower
-  border-radius 6px
   padding 0 16px
   user-select none
   font-size 16px
+  font-weight 500
+  // Type's
+  &__primary
+    background-color $color-cornflower
+  &__content
+    display grid
+    grid-template-columns repeat(auto-fit, minmax(max-content, 0))
+    grid-gap 16px
+    align-items center
+    justify-content space-between
+
   &__text
     grid-row 1
   &__icon
@@ -38,7 +42,8 @@
       color: white
       &.s-btn--outlined
         color: $color-cornflower
-
+    &--rounted
+      border-radius 6px
     &--outlined
       background-color #fff
       border 2px solid $color-cornflower

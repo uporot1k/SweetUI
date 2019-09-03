@@ -77,7 +77,9 @@ module.exports = {
       use: [
         'vue-style-loader',
         'css-loader',
-        'stylus-loader'
+        'postcss-loader',
+        'stylus-loader',
+        
       ]
     }, {
       test: /\.css$/,

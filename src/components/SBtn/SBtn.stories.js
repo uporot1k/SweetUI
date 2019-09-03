@@ -22,7 +22,7 @@ let stories = storiesOf('Button', module);
         default: text('Color', 'yellow')
       },
       text: {
-        default: text('Text', 'test')
+        default: text('Text', 'Это кнопка')
       },
       outlined: {
         default: boolean('Outlined', false)
@@ -32,6 +32,9 @@ let stories = storiesOf('Button', module);
       },
       disabled: {
         default: boolean('Disabled', false)
+      },
+      rounted: {
+        default: boolean('Rounted', false)
       }
     },
     template: `
@@ -41,14 +44,16 @@ let stories = storiesOf('Button', module);
         :outlined="outlined" 
         :iconPosition="iconPosition"
         :disabled="disabled"
+        :rounted="rounted"
+        type="primary"
       >
         {{text}}
       </s-btn>      
     `,
   }))
-  .add('Small', () => ({
+  .add('With Icon', () => ({
     components: { SBtn },
-    template: '<s-btn size="small">Тестовая</s-btn>'
+    template: '<s-btn icon="search">Тестовая</s-btn>'
   }))
   .add('Disabled', () => ({
     components: { SBtn },

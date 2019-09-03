@@ -3,14 +3,16 @@
     :is="tag"
     :class="classes"
   )
-    .s-btn__text
-      slot
-    .s-btn__icon.icon(
-      :class="[iconPosition === 'left' ? 'icon--left' : 'icon--right']"
-    )  
-      s-icon(
-        icon="search"
+    .s-btn__content
+      .s-btn__text
+        slot
+      .s-btn__icon.icon(
+        :class="[iconPosition === 'left' ? 'icon--left' : 'icon--right']"
+        v-if="icon != undefined"
       )  
+        s-icon(
+          :icon="icon"
+        )  
 </template>
 <script>
   import './SBtn.styl'
@@ -45,9 +47,10 @@
           's-btn--small': this.size === 'small',
           's-btn--big': this.size === 'big',
           's-btn--disabled': this.$attrs.disabled ? true : false,
-          's-btn--primary': !this.type !== '' ? true : false,
-          's-btn--outlined': this.$attrs.outlined ===true,
-          ...this.type
+          's-btn--outlined': this.$attrs.outlined === true,
+          's-btn--rounted': this.$attrs.rounted === true,
+          [`is-${this.type}`]: this.type != undefined ? true : false,
+
         }
       },
     },
