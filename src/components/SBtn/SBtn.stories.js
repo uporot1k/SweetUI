@@ -33,8 +33,8 @@ let stories = storiesOf('Button', module);
       disabled: {
         default: boolean('Disabled', false)
       },
-      rounted: {
-        default: boolean('Rounted', false)
+      rounded: {
+        default: boolean('Rounded', false)
       }
     },
     template: `
@@ -44,7 +44,7 @@ let stories = storiesOf('Button', module);
         :outlined="outlined" 
         :iconPosition="iconPosition"
         :disabled="disabled"
-        :rounted="rounted"
+        :rounded="rounded"
         type="primary"
       >
         {{text}}

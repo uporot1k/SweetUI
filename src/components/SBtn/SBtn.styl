@@ -5,6 +5,7 @@
   user-select none
   font-size 16px
   font-weight 500
+  background-color #fff
   // Type's
   &__primary
     background-color $color-cornflower
@@ -38,11 +39,14 @@
         background #fff 
         border 2px solid $color-grey-2
     // Type  
+    &--active
+      background-color $color-cornflower  
+      color white
     &--primary
       color: white
       &.s-btn--outlined
         color: $color-cornflower
-    &--rounted
+    &--rounded
       border-radius 6px
     &--outlined
       background-color #fff

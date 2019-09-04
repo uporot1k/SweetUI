@@ -2,6 +2,7 @@
   component(
     :is="tag"
     :class="classes"
+    @click="$emit('click')"
   )
     .s-btn__content
       .s-btn__text
@@ -28,6 +29,10 @@
         type: [String, Object],
         default: 'big'
       },
+      active: {
+        type: Boolean,
+        default: false,
+      },
       type: String,
       icon: String,
       iconFill: String, 
@@ -35,7 +40,7 @@
     },
     data() {
       return {
-        fill: "",
+        activeState: this.active,
         
       }
     },
@@ -48,22 +53,31 @@
           's-btn--big': this.size === 'big',
           's-btn--disabled': this.$attrs.disabled ? true : false,
           's-btn--outlined': this.$attrs.outlined === true,
-          's-btn--rounted': this.$attrs.rounted === true,
+          's-btn--rounded': this.$attrs.rounded === true,
+          's-btn--active': this.activeState,
           [`is-${this.type}`]: this.type != undefined ? true : false,
 
         }
       },
     },
+    methods: {
+      // toggleBtn() {
+      //   console.log(this)
+      //   if (this.$attrs.disabledToggle != true) {
+      //     this.activeState = !this.activeState;
+      //     this.$emit('toggle', this.activeState);
+      //   }
+      // }
+    },
+    mounted() {
+      // console.log(this)
+      // const self = this;
+      // let element = this.$el;
 
-    created() {
-      console.log(this.$attrs)
-      if(this.iconFill === undefined) {
-        console.log(1)
-        this.fill = this.color;
-        console.log(this.fill)
-      } else {
-        this.fill = this.iconFill
-      }
+      // if(this.$attrs.hasOwnProperty('toggle')) {
+
+      //   element.addEventListener('click', this.toggleBtn);
+      // }
     }
   }
 </script>
