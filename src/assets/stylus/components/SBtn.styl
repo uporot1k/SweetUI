@@ -1,0 +1,53 @@
+.s-btn
+  padding 0 16px
+  user-select none
+  font-size 16px
+  font-weight 500
+  background-color #fff
+  // Type's
+  &__primary
+    background-color $color-cornflower
+  &__content
+    display grid
+    grid-template-columns repeat(auto-fit, minmax(max-content, 0))
+    grid-gap 16px
+    align-items center
+    justify-content space-between
+
+  &__text
+    grid-row 1
+  &__icon
+    grid-row 1
+    &.icon--left
+      grid-column: 1
+  &:focus
+    outline none
+  &.s-btn  
+    // Size
+    &--small
+      height 36px    
+    &--big
+      height 48px    
+
+    // State 
+    &--disabled
+      background-color $color-grey-3 
+      color #778699 !important  
+      &.s-btn--outlined
+        background #fff 
+        border 2px solid $color-grey-2
+    // Type  
+    &--active
+      background-color $color-cornflower  
+      color white
+    &--primary
+      color: white
+      &.s-btn--outlined
+        color: $color-cornflower
+    &--rounded
+      border-radius 6px
+    &--outlined
+      background-color #fff
+      border 2px solid $color-cornflower
+     
+        

@@ -1,19 +1,27 @@
 {
-  "name": "sweetui",
-  "version": "1.0.0",
+  "name": "sweet-components",
+  "version": "1.0.0-rc.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
-    "build": "webpack  --config ./build/webpack.build.conf.js",
-    "storybook": "start-storybook -p 6006 -s ./src"
+    "storybook": "start-storybook -p 6006 -s ./src",
+    "build:js": "rollup -c && rollup -c --environment MINIFY",
+    "build:js:watch": "rollup -c --watch",
+    "build:styl": "stylus   < src/assets/stylus/main.styl > dist/sweetui.css --resolve-url --compress",
+    "build:styl:watch": "stylus src/assets/stylus/main.styl --w ",
+    "build:lib": "npm run build:js && npm run build:styl",
+    "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
+    "build:docs": "node build/build.js",
+    "build": "npm run build:lib && npm run build:docs",
+    "cov": "./node_modules/codcov/bin/codcov"
   },
   "browserslist": [
     "> 1%",
     "last 3 version"
   ],
   "author": "Egor Popov",
-  "license": "MIT",
+  "license": "MIT", 
   "dependencies": {
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
@@ -40,6 +48,14 @@
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
+    "rollup": "^1.20.3",
+    "rollup-copy-plugin": "^0.1.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-vue": "^5.0.1",
     "style-loader": "^1.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",

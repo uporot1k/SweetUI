@@ -1,12 +1,20 @@
-import './assets/stylus/main.styl'
+import * as components from './components'
 
-import Vue from 'vue'
-import GlobalRegistration from '~/util/GlobalRegistration'
+import { use, registerComponentProgrammatic } from './util/registration'
 
-Vue.config.productionTip = false
+const SweetUI = {
+  install(Vue) {
+    for (let componentName in components) {
+      Vue.use(components[componentName])
+    }
 
-GlobalRegistration();  
+    registerComponentProgrammatic(Vue, 'config')
+  }
+}
 
-const app = new Vue({
-  el: '#app',
-})
+use(SweetUI)
+
+export default SweetUI
+
+
+export * from './components'

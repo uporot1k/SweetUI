@@ -38,9 +38,3 @@ export default {
   }
 }
 </script>
-<style lang="stylus">
-  .icon
-    display flex
-    align-items center
-    justify-content center
-</style>

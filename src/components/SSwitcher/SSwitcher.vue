@@ -12,7 +12,6 @@
 
 </template>
 <script>
-  import './SSwitcher.styl'
   import { switchOptions } from '../../mixins/switchable/index'
   export default {
     props: {

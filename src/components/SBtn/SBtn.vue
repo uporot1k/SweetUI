@@ -16,8 +16,6 @@
         )  
 </template>
 <script>
-  import './SBtn.styl'
-
   export default {
     name: 'SBtn',
     props: {
