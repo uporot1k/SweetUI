@@ -1,8 +1,9 @@
 {
   "name": "sweet-components",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
     "storybook": "start-storybook -p 6006 -s ./src",
@@ -21,7 +22,7 @@
     "last 3 version"
   ],
   "author": "Egor Popov",
-  "license": "MIT", 
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.22",

@@ -1,4 +1,4 @@
-/*! SweetUI v1.0.0 | MIT License | github.com/uporot1k/SweetUI */
+/*! SweetUI v1.0.0-rc.1 | MIT License | github.com/uporot1k/SweetUI */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
