@@ -1,6 +1,6 @@
 {
   "name": "sweet-components",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -11,10 +11,10 @@
     "build:js:watch": "rollup -c --watch",
     "build:styl": "stylus   < src/assets/stylus/main.styl > dist/sweetui.css --resolve-url --compress",
     "build:styl:watch": "stylus src/assets/stylus/main.styl --w ",
-    "build:lib": "npm run build:js && npm run build:styl",
+    "build:lib": "npm run build:js",
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
     "build:docs": "node build/build.js",
-    "build": "npm run build:lib && npm run build:docs",
+    "build": "npm run build:lib",
     "cov": "./node_modules/codcov/bin/codcov"
   },
   "browserslist": [
