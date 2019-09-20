@@ -1,7 +1,7 @@
 import * as components from './components'
 
-import config, { setOptions } from './utils/config'
-import { use, registerComponentProgrammatic } from './utils/plugins'
+import config, { setOptions } from './util/config'
+import { use, registerComponentProgrammatic } from './util/plugins'
 
 const SweetUI = {
     install(Vue, options = {}) {
