@@ -3,7 +3,7 @@ import { registerComponent, use } from '../../util/registration';
 
 const Plugin = {
   install(Vue) {
-    registerComponent(Vue, Button)
+    registerComponent(Vue, SBtn)
   }
 }
 

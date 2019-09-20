@@ -1,9 +1,14 @@
 {
   "name": "sweet-components",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.7",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "unpkg": "dist/buefy.min.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
     "storybook": "start-storybook -p 6006 -s ./src",

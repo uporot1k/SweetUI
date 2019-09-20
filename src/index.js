@@ -1,20 +1,29 @@
 import * as components from './components'
 
-import { use, registerComponentProgrammatic } from './util/registration'
+import config, { setOptions } from './utils/config'
+import { use, registerComponentProgrammatic } from './utils/plugins'
 
 const SweetUI = {
-  install(Vue) {
-    for (let componentName in components) {
-      Vue.use(components[componentName])
+    install(Vue, options = {}) {
+        // Options
+        setOptions(Object.assign(config, options))
+        // Components
+        for (let componentKey in components) {
+            Vue.use(components[componentKey])
+        }
+        // Config component
+        const SweetUIProgrammatic = {
+            setOptions(options) {
+                setOptions(Object.assign(config, options))
+            }
+        }
+        registerComponentProgrammatic(Vue, 'config', SweetUIProgrammatic)
     }
-
-    registerComponentProgrammatic(Vue, 'config')
-  }
 }
 
 use(SweetUI)
 
 export default SweetUI
 
-
+// export all components as vue plugin
 export * from './components'
