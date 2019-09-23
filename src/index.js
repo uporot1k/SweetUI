@@ -1,26 +1,22 @@
-import * as components from './components'
+// Import vue components
+import * as components from './components/index.js';
 
-// import config, { setOptions } from './util/config'
-// import { use, registerComponentProgrammatic } from './util/plugins'
-
-// // Импорт vue компонента
-// import component from './my-component.vue';
-
-// Объявление функции установки, выполняемой Vue.use()
-export function install(Vue) {
-  for (let componentKey in components) {
-    if (install.installed) return;
-    install.installed = true;
-    Vue.component(componentKey, components[componentKey]);
-  }
+// install function executed by Vue.use()
+function install(Vue) {
+  if (install.installed) return;
+  install.installed = true;
+  Object.keys(components).forEach((componentName) => {
+    Vue.component(componentName, components[componentName]);
+  });
 }
 
-// Создание значения модуля для Vue.use()
+// Create module definition for Vue.use()
 const plugin = {
-  install
+  install,
 };
 
-// Автоматическая установка, когда vue найден (например в браузере с помощью тега <script>)
+// To auto-install when vue is found
+/* global window global */
 let GlobalVue = null;
 if (typeof window !== 'undefined') {
   GlobalVue = window.Vue;
@@ -31,33 +27,9 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-// Экспорт компонента, для использования в качестве модуля (npm/webpack/etc.)
-// export default component;
+// Default export is library as a whole, registered via Vue.use()
+export default plugin;
 
-export * from './components'
-
-
-// const SweetUI = {
-//     install(Vue, options = {}) {
-//         // Options
-//         setOptions(Object.assign(config, options))
-//         // Components
-//         for (let componentKey in components) {
-//             Vue.use(components[componentKey])
-//         }
-//         // Config component
-//         const SweetUIProgrammatic = {
-//             setOptions(options) {
-//                 setOptions(Object.assign(config, options))
-//             }
-//         }
-//         registerComponentProgrammatic(Vue, 'config', SweetUIProgrammatic)
-//     }
-// }
-
-// use(SweetUI)
-
-// export default SweetUI
-
-// export all components as vue plugin
-
+// To allow individual component use, export components
+// each can be registered via Vue.component()
+export * from './components/index';

@@ -1,69 +1,121 @@
-import commonjs from 'rollup-plugin-commonjs'; // Конвертирование CommonJS модулей в ES6
-import vue from 'rollup-plugin-vue'; // Обработка однофайловых компонентов .vue
-import buble from 'rollup-plugin-buble'; // Транспиляция/добавление полифилов для умеренной поддержки браузеров
+// rollup.config.js
+import vue from 'rollup-plugin-vue';
+import buble from 'rollup-plugin-buble';
+import commonjs from 'rollup-plugin-commonjs';
+import replace from 'rollup-plugin-replace';
+import { terser } from 'rollup-plugin-terser';
+import minimist from 'minimist';
 
-const capitalize = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
+const argv = minimist(process.argv.slice(2));
+
+const baseConfig = {
+  input: './src/index.js',
+  plugins: {
+    preVue: [
+      replace({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
+      commonjs(),
+    ],
+    vue: {
+      css: true,
+      template: {
+        isProduction: true,
+      },
+    },
+    postVue: [
+      buble(),
+    ],
+  },
+};
+
+// UMD/IIFE shared settings: externals and output.globals
+// Refer to https://rollupjs.org/guide/en#output-globals for details
+const external = [
+  // list external dependencies, exactly the way it is written in the import statement.
+  // eg. 'jquery'
+];
+const globals = {
+  // Provide global variable names to replace your external imports
+  // eg. jquery: '$'
+};
+
+// Customize configs for individual targets
+const buildFormats = [];
+if (!argv.format || argv.format === 'es') {
+  const esConfig = {
+    ...baseConfig,
+    output: {
+      file: 'dist/sweet-components.esm.js',
+      format: 'esm',
+      exports: 'named',
+    },
+    plugins: [
+      ...baseConfig.plugins.preVue,
+      vue(baseConfig.plugins.vue),
+      ...baseConfig.plugins.postVue,
+      terser({
+        output: {
+          ecma: 6,
+        },
+      }),
+    ],
+  };
+  buildFormats.push(esConfig);
 }
 
-export default [
-  {
-    input: 'src/index.js',
+if (!argv.format || argv.format === 'cjs') {
+  const umdConfig = {
+    ...baseConfig,
+    external,
     output: {
-      format: 'esm',
-      file: 'dist/library.esm.js',
-      name: capitalize('test'),
+      compact: true,
+      file: 'dist/sweet-components.ssr.js',
+      format: 'cjs',
+      name: 'SweetComponents',
+      exports: 'named',
+      globals,
     },
     plugins: [
-      commonjs(),
+      ...baseConfig.plugins.preVue,
       vue({
-          css: true, // Динамически внедряем CSS в тег <style>
-          compileTemplate: true, // Явное преобразование шаблона в рендер-функцию
+        ...baseConfig.plugins.vue,
+        template: {
+          ...baseConfig.plugins.vue.template,
+          optimizeSSR: true,
+        },
       }),
-      buble() // Транспиляция в ES5
+      ...baseConfig.plugins.postVue,
     ],
-  },
-  {
-    input: 'src/index.js',
+  };
+  buildFormats.push(umdConfig);
+}
+
+if (!argv.format || argv.format === 'iife') {
+  const unpkgConfig = {
+    ...baseConfig,
+    external,
     output: {
+      compact: true,
+      file: 'dist/sweet-components.min.js',
       format: 'iife',
-      file: 'dist/library.js',
-      name: capitalize('test'),
+      name: 'SweetComponents',
+      exports: 'named',
+      globals,
     },
     plugins: [
-      commonjs(),
-      vue({
-          css: true, // Динамически внедряем CSS в тег <style>
-          compileTemplate: true, // Явное преобразование шаблона в рендер-функцию
+      ...baseConfig.plugins.preVue,
+      vue(baseConfig.plugins.vue),
+      ...baseConfig.plugins.postVue,
+      terser({
+        output: {
+          ecma: 5,
+        },
       }),
-      buble() // Транспиляция в ES5
     ],
-  },
-];
+  };
+  buildFormats.push(unpkgConfig);
+}
 
-
-// import vue from 'rollup-plugin-vue'
-
-// export default  [
-//   {
-//     input: 'src/index.js',
-//     output: {
-//       format: 'esm',
-//       file: 'dist/library.esm.js'
-//     },
-//     plugins: [
-//       vue()
-//     ]
-//   },
-//   {
-//     input: 'src/index.js',
-//     output: {
-//       format: 'iife',
-//       file: 'dist/library.js'
-//     },
-//     plugins: [
-//       vue()
-//     ]
-//   },
-// ]
+// Export config
+export default buildFormats;

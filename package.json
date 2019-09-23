@@ -1,9 +1,9 @@
 {
   "name": "sweet-components",
-  "version": "0.0.0-rc.10",
+  "version": "0.0.0-rc.18",
   "description": "",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/sweet-components.min.js",
+  "module": "dist/sweet-components.esm.js",
   "unpkg": "dist/sweet-components.min.js",
   "files": [
     "dist",
@@ -20,7 +20,8 @@
     "build:lib:watch": "concurrently \"npm run build:js:watch\" \"npm run build:scss:watch \" ",
     "build:docs": "node build/build.js",
     "build": "npm run build:lib",
-    "cov": "./node_modules/codcov/bin/codcov"
+    "cov": "./node_modules/codcov/bin/codcov",
+    "publish": "npm publish"
   },
   "browserslist": [
     "> 1%",

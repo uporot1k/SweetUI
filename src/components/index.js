@@ -1,9 +1,3 @@
-import SBtn from './SBtn'
-import SIcon from './SIcon'
-import SSwitcher from './SSwitcher'
-
-export {
-  SBtn,
-  SIcon,
-  SSwitcher
-}
+export { default as SSwitcher } from './SSwitcher/SSwitcher.vue'
+export { default as SIcon } from './SIcon/SIcon.vue'
+export { default as SBtn } from './SBtn/SBtn.vue'
