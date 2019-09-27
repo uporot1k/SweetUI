@@ -2,6 +2,7 @@ import { configure } from '@storybook/vue';
 import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
+import '../src/assets/stylus/main.styl'
 
 const requireComponent = require.context(
   // Относительный путь до каталога компонентов

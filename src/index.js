@@ -1,4 +1,5 @@
 // Import vue components
+import './assets/stylus/main.styl'
 import * as components from './components/index.js';
 
 // install function executed by Vue.use()
